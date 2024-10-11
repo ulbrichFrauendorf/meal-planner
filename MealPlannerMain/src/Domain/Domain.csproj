@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>MealPlanner.Domain</RootNamespace>
+    <AssemblyName>MealPlanner.Domain</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Entities\Learn\**" />
+    <Compile Remove="Entities\Payspace\**" />
+    <Compile Remove="Exceptions\**" />
+    <Compile Remove="ValueObjects\**" />
+    <EmbeddedResource Remove="Entities\Learn\**" />
+    <EmbeddedResource Remove="Entities\Payspace\**" />
+    <EmbeddedResource Remove="Exceptions\**" />
+    <EmbeddedResource Remove="ValueObjects\**" />
+    <None Remove="Entities\Learn\**" />
+    <None Remove="Entities\Payspace\**" />
+    <None Remove="Exceptions\**" />
+    <None Remove="ValueObjects\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" />
+    <PackageReference Include="Newtonsoft.Json" />
+  </ItemGroup>
+
+</Project>

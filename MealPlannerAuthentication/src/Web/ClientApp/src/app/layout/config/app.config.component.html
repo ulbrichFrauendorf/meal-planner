@@ -1,0 +1,17 @@
+<button class="layout-config-button p-link" type="button" (click)="onConfigButtonClick()">
+    <i class="pi pi-cog"></i>
+</button>
+
+<p-sidebar [(visible)]="visible" position="right" [transitionOptions]="'.3s cubic-bezier(0, 0, 0.2, 1)'" styleClass="layout-config-sidebar w-20rem">
+
+    <h6>Theme</h6>
+    <div class="grid">
+        <div class="col-3">
+            <button class="p-link w-2rem h-2rem" (click)="changeTheme()">
+                <i class="pi pi-sun large-icon" style="font-size: 1.5rem;"></i>
+            </button>
+        </div>
+    </div>
+
+
+</p-sidebar>

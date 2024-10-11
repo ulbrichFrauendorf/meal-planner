@@ -1,0 +1,26 @@
+<div class="login-container">
+    <div class="card login-card">
+        <div class="text-center mb-5">
+            <img
+                src="assets/layout/images/{{
+                    layoutService.config().colorScheme === 'light'
+                        ? 'invensys-icon-light'
+                        : 'invensys-icon-dark'
+                }}.png"
+                alt="invensys-logo"
+                class="full-page-logo"
+            />
+        </div>
+        <div class="p-fluid">
+            <div class="p-field">
+                <p-button
+                    type="button"
+                    pRipple
+                    label="Log Out"
+                    [text]="true"
+                    (click)="logout()"
+                />
+            </div>
+        </div>
+    </div>
+</div>

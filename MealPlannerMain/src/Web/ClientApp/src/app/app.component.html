@@ -1,0 +1,23 @@
+<div *ngIf="isLoading$ | async; else showSite" class="overlay">
+   <app-loading-spinner></app-loading-spinner>
+</div>
+
+<ng-template #showSite>
+   <p-toast [key]="'global'" />
+   <router-outlet />
+</ng-template>
+
+<style>
+   .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999; /* Ensure it appears on top */
+   }
+</style>

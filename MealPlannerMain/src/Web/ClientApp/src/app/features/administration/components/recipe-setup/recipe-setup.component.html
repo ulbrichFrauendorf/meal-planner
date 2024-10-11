@@ -1,0 +1,14 @@
+<div class="flex flex-wrap justify-content-start gap-5">
+    <p-tabMenu
+        [model]="items"
+        [activeItem]="activeItem"
+        (activeItemChange)="onActiveItemChange($event)"
+    ></p-tabMenu>
+</div>
+<div class="mt-3 setup-container">
+    <ng-container *ngIf="activeItem === items[0]">
+        <p-fieldset legend="...">
+            <app-recipe-ingredients [recipeId]="recipeId" />
+        </p-fieldset>
+    </ng-container>
+</div>

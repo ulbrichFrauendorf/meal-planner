@@ -1,0 +1,12 @@
+<div class="p-fluid">
+    <div class="p-field">
+        <label for="peopleFed">Set ingredient quantity</label>
+        <p-knob [(ngModel)]="quantity" />
+    </div>
+</div>
+
+<app-dialog-actions
+    [submitLabel]="'Update'"
+    (cancel)="onCancel()"
+    (submit)="onSubmit()"
+></app-dialog-actions>

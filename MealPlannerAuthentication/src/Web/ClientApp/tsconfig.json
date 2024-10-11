@@ -1,0 +1,39 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "baseUrl": "src",
+        "paths": {
+            "@layout/*": ["app/layout/*"],
+            "@dashboard/*": ["app/features/landing-dashboard/*"],
+            "@auth/*": ["app/features/auth/*"],
+            "@users/*": ["app/features/user-management/*"],
+            "@status/*": ["app/features/status/*"]
+        },
+        "outDir": "./dist/out-tsc",
+        "forceConsistentCasingInFileNames": true,
+        "strict": false,
+        "noImplicitOverride": true,
+        "noPropertyAccessFromIndexSignature": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "sourceMap": true,
+        "declaration": false,
+        "downlevelIteration": true,
+        "experimentalDecorators": true,
+        "moduleResolution": "node",
+        "importHelpers": true,
+        "target": "esnext",
+        "module": "ES2022",
+        "useDefineForClassFields": false,
+        "allowSyntheticDefaultImports": true,
+        "lib": ["ES2022", "dom"]
+    },
+    "angularCompilerOptions": {
+        "enableI18nLegacyMessageIdFormat": false,
+        "strictInjectionParameters": true,
+        "strictInputAccessModifiers": true,
+        "strictTemplates": true,
+        "fullTemplateTypeCheck": true
+    }
+}

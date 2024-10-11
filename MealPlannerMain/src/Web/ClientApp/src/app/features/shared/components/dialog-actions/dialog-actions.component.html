@@ -1,0 +1,14 @@
+<div class="flex justify-content-end flex-wrap pt-4 mr-4 gap-2">
+    <p-button
+        label="Cancel"
+        [text]="true"
+        severity="secondary"
+        (click)="onCancel()"
+    />
+    <p-button
+        label="{{ submitLabel }}"
+        [outlined]="true"
+        severity="primary"
+        (click)="onSubmit()"
+    />
+</div>

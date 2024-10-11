@@ -1,0 +1,17 @@
+<p-multiSelect
+    [options]="dropdownOptions"
+    [(ngModel)]="selectedValues"
+    [filter]="true"
+    (onChange)="onDropdownChange($event)"
+>
+</p-multiSelect>
+
+<!-- Free Text Input -->
+<p-inputText
+    *ngIf="showFreeTextInput"
+    [(ngModel)]="newValue"
+    (ngModelChange)="onNewValueChange($event)"
+>
+</p-inputText>
+
+<p-button label="Add" (click)="addNewValue()"> </p-button>

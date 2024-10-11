@@ -1,0 +1,24 @@
+.no-results-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    width: 100%;
+}
+
+.no-results-image {
+    height: auto;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+.no-results-image.dynamic {
+    max-width: 40%;
+}
+
+.no-results-image.fixed {
+    width: 30rem;
+}
+.no-results-image.loaded {
+    opacity: 0.5;
+}

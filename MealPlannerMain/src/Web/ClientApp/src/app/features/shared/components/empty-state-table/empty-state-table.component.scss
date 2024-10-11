@@ -1,0 +1,15 @@
+.no-results-table-container {
+    height: 13rem;
+    width: 13rem;
+}
+
+.no-results-image-fixed {
+    width: 13rem;
+    height: auto;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+.no-results-image-fixed.loaded {
+    opacity: 0.5;
+}

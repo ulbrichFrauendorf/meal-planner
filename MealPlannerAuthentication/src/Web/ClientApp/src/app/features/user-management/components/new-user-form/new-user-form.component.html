@@ -1,0 +1,56 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="formgroup">
+        <div class="field mt-5 p-fluid">
+            <p-floatLabel>
+                <input
+                    type="text"
+                    pInputText
+                    formControlName="email"
+                    autocomplete="new-email"
+                />
+                <label for="email">User Email</label>
+            </p-floatLabel>
+            <p-messages [(value)]="emailErrors" [closable]="false"></p-messages>
+        </div>
+
+        <div class="field mt-5 mb-5">
+            <p-fieldset legend="Claims" [toggleable]="true" [collapsed]="false">
+                <div class="field p-fluid mt-5">
+                    <p-floatLabel>
+                        <p-chips formControlName="roleClaims" />
+                        <label for="roleClaims">Role Claims</label>
+                    </p-floatLabel>
+                </div>
+                <div class="field p-fluid mt-5">
+                    <p-floatLabel>
+                        <p-chips formControlName="systemClaims" />
+                        <label for="systemClaims">System Claims</label>
+                    </p-floatLabel>
+                </div>
+            </p-fieldset>
+        </div>
+
+        <div class="flex flex-row justify-content-between mt-4">
+            <button
+                id="cancelBtn"
+                name="cancelBtn"
+                pButton
+                pRipple
+                type="button"
+                label="Cancel"
+                icon="pi pi-times"
+                class="p-button-text"
+                (click)="onCancel()"
+            ></button>
+            <button
+                pButton
+                pRipple
+                type="submit"
+                [disabled]="!userForm.valid"
+                label="Save"
+                icon="pi pi-check"
+                class="p-button-text"
+            ></button>
+        </div>
+    </div>
+</form>

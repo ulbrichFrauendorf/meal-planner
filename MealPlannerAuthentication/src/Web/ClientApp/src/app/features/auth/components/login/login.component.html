@@ -1,0 +1,99 @@
+<div class="login-container">
+    <div class="card login-card">
+        <div class="text-center mb-5">
+            <img
+                src="assets/layout/images/{{
+                    layoutService.config().colorScheme === 'light'
+                        ? 'invensys-icon-light'
+                        : 'invensys-icon-dark'
+                }}.png"
+                alt="invensys-logo"
+                class="full-page-logo"
+            />
+        </div>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="p-fluid">
+                <div class="p-field">
+                    <p-floatLabel>
+                        <input
+                            type="email"
+                            pInputText
+                            formControlName="username"
+                            autocomplete="new-password"
+                        />
+                        <label for="username">Username</label>
+                    </p-floatLabel>
+                </div>
+                <div class="p-field">
+                    <p-floatLabel>
+                        <input
+                            type="password"
+                            pInputText
+                            formControlName="password"
+                            autocomplete="new-password"
+                        />
+                        <label for="password">Password</label>
+                    </p-floatLabel>
+                </div>
+            </div>
+            <div class="flex flex-row justify-content-end mt-4">
+                <button
+                    type="submit"
+                    pButton
+                    pRipple
+                    label="Login"
+                    [disabled]="loginForm.invalid"
+                    icon="pi pi-check"
+                    class="p-button-text"
+                ></button>
+            </div>
+        </form>
+        <div class="flex flex-row justify-content-end mt-4">
+            <button
+                type="button"
+                pButton
+                pRipple
+                label="Reset Password"
+                (click)="onForgotPassword()"
+                icon="pi pi-undo"
+                class="p-button-text"
+            ></button>
+        </div>
+    </div>
+</div>
+
+<p-confirmDialog #cd>
+    <ng-template pTemplate="headless" let-message>
+        <div
+            class="flex flex-column align-items-center p-5 surface-overlay border-round"
+        >
+            <div
+                class="border-circle bg-primary inline-flex justify-content-center align-items-center h-6rem w-6rem"
+            >
+                <i class="pi pi-question text-5xl"></i>
+            </div>
+            <span class="font-bold text-2xl block mb-2 mt-4">
+                {{ message.header }}
+            </span>
+            <p class="mb-0">{{ message.message }}</p>
+            <div class="flex flex-row justify-content-between mt-4">
+                <button
+                    pButton
+                    pRipple
+                    label="Save"
+                    icon="pi pi-check"
+                    (click)="cd.accept()"
+                    class="p-button-outlined p-button-text"
+                ></button>
+                <button
+                    pButton
+                    pRipple
+                    label="Cancel"
+                    icon="pi pi-times"
+                    (click)="cd.reject()"
+                    class="p-button-text"
+                ></button>
+            </div>
+        </div>
+    </ng-template>
+</p-confirmDialog>

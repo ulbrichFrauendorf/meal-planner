@@ -1,0 +1,28 @@
+<form [formGroup]="recipeForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="flex flex-column gap-3 justify-content-center">
+        <div class="field p-fluid mt-4">
+            <p-floatLabel>
+                <input type="text" pInputText formControlName="name" />
+                <label for="name">Recipe Name</label>
+            </p-floatLabel>
+            <small
+                class="p-error"
+                *ngIf="
+                    recipeForm.get('name')?.invalid &&
+                    recipeForm.get('name')?.dirty
+                "
+            >
+                Recipe Name Is Required</small
+            >
+        </div>
+        <div class="field p-fluid mt-4">
+            <label for="peopleFed">How many people can this recipe feed?</label>
+            <p-knob formControlName="peopleFed" />
+        </div>
+    </div>
+
+    <app-dialog-actions
+        (cancel)="onCancel()"
+        (submit)="onSubmit()"
+    ></app-dialog-actions>
+</form>

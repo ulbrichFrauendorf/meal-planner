@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Meal Planner</title>
+        <base href="/" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" type="image/x-icon" href="favicon.ico" />
+        <script>
+            // Read the theme and color scheme from localStorage
+            const theme =
+                localStorage.getItem("viewModeTheme") || "aura-light-amber";
+            const colorScheme =
+                localStorage.getItem("viewModeColorScheme") || "light";
+
+            // Construct the new href for the theme
+            const baseThemePath = "assets/layout/styles/themes/";
+            const newHref = `${baseThemePath}${theme}/theme.css`;
+            // const baseThemePath = "node_modules/primeng/resources/themes/";
+            // const newHref = `${baseThemePath}${theme}/theme.css`;
+
+            // Set the href attribute of the theme link
+            href = "assets/layout/styles/themes/aura-light-amber/theme.css";
+            document.write(
+                `<link id="theme-css" rel="stylesheet" type="text/css" href="${newHref}" />`
+            );
+
+            // document.write(
+            //    `<link id="theme-css" rel="stylesheet" type="text/css" href="${newHref}" />`
+            // );
+        </script>
+    </head>
+    <body>
+        <app-root></app-root>
+    </body>
+</html>

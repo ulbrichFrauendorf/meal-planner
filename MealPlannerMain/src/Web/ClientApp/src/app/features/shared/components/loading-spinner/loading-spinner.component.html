@@ -1,0 +1,10 @@
+<div
+   *ngIf="this.loaderService.getLoading()"
+   class="flex justify-content-center"
+>
+   <p-progressSpinner
+      aria-label="Loading"
+      styleClass="w-4rem h-4rem"
+      strokeWidth="4"
+   ></p-progressSpinner>
+</div>

@@ -1,0 +1,17 @@
+<div class="flex justify-contents no-results-container">
+    <img
+        [src]="
+            'assets/images/' +
+            (layoutService.config().colorScheme === 'light'
+                ? 'no-results-light'
+                : 'no-results-dark') +
+            '.png'
+        "
+        alt="No Results"
+        class="no-results-image"
+        [class.loaded]="imageLoaded"
+        [class.fixed]="fixed"
+        [class.dynamic]="!fixed"
+        (load)="onImageLoad()"
+    />
+</div>

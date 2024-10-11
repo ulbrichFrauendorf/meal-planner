@@ -1,0 +1,73 @@
+<!-- <p-toast></p-toast> -->
+
+<p-toast></p-toast>
+<p-toolbar styleClass="mb-4 gap-2">
+    <ng-template pTemplate="left">
+        <div class="field">
+            <button
+                pButton
+                pRipple
+                label="New"
+                icon="pi pi-plus"
+                class="p-button-text"
+                (click)="showAddUserDialog()"
+            ></button>
+        </div>
+    </ng-template>
+    <!-- <ng-template pTemplate="right">
+        <ng-container *ngIf="displayUserForm$ | async">
+            <app-new-user-form
+                (displayUserFormEvent)="handleDisplayUserForm($event)"
+            >
+            </app-new-user-form>
+        </ng-container>
+    </ng-template> -->
+</p-toolbar>
+
+<p-table
+    [value]="users$ | async"
+    styleClass="p-datatable-striped"
+    [tableStyle]="{ 'min-width': '50rem' }"
+>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>UserName</th>
+            <th>Roles</th>
+            <th>Systems</th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+        <tr>
+            <td>{{ user.identityUser.userName }}</td>
+            <td>
+                <div *ngFor="let role of user.roleClaims">
+                    <p-chip label="{{ role }}" />
+                </div>
+            </td>
+            <td>
+                <div *ngFor="let system of user.systemClaims">
+                    <p-chip label="{{ system }}" />
+                </div>
+            </td>
+            <td>
+                <button
+                    pButton
+                    pRipple
+                    icon="pi pi-pencil"
+                    class="p-button-rounded p-button-text mr-2"
+                    (click)="showEditUserDialog(user)"
+                ></button>
+                <button
+                    pButton
+                    pRipple
+                    icon="pi pi-trash"
+                    class="p-button-rounded p-button-text mr-2"
+                    (click)="deleteIdentityUser(user)"
+                ></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-confirmDialog [style]="{ 'min-width': '50em' }"></p-confirmDialog>

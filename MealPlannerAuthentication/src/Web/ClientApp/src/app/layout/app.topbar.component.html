@@ -1,0 +1,62 @@
+<div class="layout-topbar">
+    <a class="layout-topbar-logo" routerLink="">
+        <img
+            src="assets/layout/images/{{
+                layoutService.config().colorScheme === 'light'
+                    ? 'invensys-icon-light'
+                    : 'invensys-icon-dark'
+            }}.png"
+            alt="invensys-logo"
+        />
+        <span>iServe</span>
+    </a>
+
+    <button
+        #menubutton
+        class="p-link layout-menu-button layout-topbar-button"
+        (click)="layoutService.onMenuToggle()"
+    >
+        <i class="pi pi-bars"></i>
+    </button>
+
+    <button
+        #topbarmenubutton
+        class="p-link layout-topbar-menu-button layout-topbar-button"
+        (click)="layoutService.showProfileSidebar()"
+    >
+        <i class="pi pi-ellipsis-v"></i>
+    </button>
+
+    <div
+        #topbarmenu
+        class="layout-topbar-menu"
+        [ngClass]="{
+            'layout-topbar-menu-mobile-active':
+                layoutService.state.profileSidebarVisible
+        }"
+    >
+        <ng-template #SignInTemplate>
+            <button class="p-link layout-topbar-button" (click)="changeTheme()">
+                <i class="pi pi-sun large-icon" style="font-size: 1.5rem"></i>
+            </button>
+            <button class="p-link layout-topbar-button" (click)="login()">
+                <i class="pi pi-sign-in"></i>
+                <span>Sign In</span>
+            </button>
+        </ng-template>
+        <ng-template #SignOutTemplate>
+            <button class="p-link layout-topbar-button" (click)="changeTheme()">
+                <i class="pi pi-sun large-icon" style="font-size: 1.5rem"></i>
+            </button>
+            <button class="p-link layout-topbar-button" (click)="logout()">
+                <i class="pi pi-sign-out"></i>
+                <span>Sign Out</span>
+            </button>
+        </ng-template>
+        <ng-container
+            *ngTemplateOutlet="authenticated ? SignOutTemplate : SignInTemplate"
+        >
+        </ng-container>
+        <ng-container *></ng-container>
+    </div>
+</div>

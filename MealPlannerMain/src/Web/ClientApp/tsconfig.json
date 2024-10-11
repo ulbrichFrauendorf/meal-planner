@@ -1,0 +1,44 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "baseUrl": "src",
+        "paths": {
+            "@app/*": ["app/*"],
+            "@core/*": ["app/_core/*"],
+            "@reports/*": ["app/features/reports/*"],
+            "@administration/*": ["app/features/administration/*"],
+            "@users/*": ["app/features/users/*"],
+            "@tenants/*": ["app/features/tenants/*"],
+            "@dashboards/*": ["app/features/dashboards/*"],
+            "@shared/*": ["app/features/shared/*"],
+        },
+        "outDir": "./dist/out-tsc",
+        "forceConsistentCasingInFileNames": true,
+        "strict": false,
+        "noImplicitOverride": true,
+        "noPropertyAccessFromIndexSignature": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "sourceMap": true,
+        "declaration": false,
+        "downlevelIteration": true,
+        "experimentalDecorators": true,
+        "moduleResolution": "node",
+        "importHelpers": true,
+        "target": "esnext",
+        "module": "ESNext",
+        "useDefineForClassFields": false,
+        "allowSyntheticDefaultImports": true,
+        "lib": ["ES2022", "dom"],
+        "skipLibCheck": true
+    },
+    "angularCompilerOptions": {
+        "enableI18nLegacyMessageIdFormat": false,
+        "strictInjectionParameters": false,
+        "strictInputAccessModifiers": false,
+        "strictTemplates": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true
+    }
+}

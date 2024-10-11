@@ -1,0 +1,1014 @@
+{
+  "x-generator": "NSwag v14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))",
+  "openapi": "3.0.0",
+  "info": {
+    "title": "invensys.iserve API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/Accounts/login": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "GetLoginData",
+        "parameters": [
+          {
+            "name": "returnUrl",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Accounts": {
+      "post": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "Login",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Accounts/change-password": {
+      "post": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "ChangePassword",
+        "requestBody": {
+          "x-name": "changeUserPasswordCommand",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePasswordCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Accounts/forgot-password": {
+      "post": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "ForgotPassword",
+        "requestBody": {
+          "x-name": "generatePasswordResetEmailCommand",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForgotPasswordCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Accounts/reset-password": {
+      "post": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "ResetPassword",
+        "requestBody": {
+          "x-name": "resetPasswordCommand",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetPasswordCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Bootstrap/angular-settings": {
+      "get": {
+        "tags": [
+          "Bootstrap"
+        ],
+        "operationId": "GetAngularApplicationSettings",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AngularSettingsDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Claims": {
+      "get": {
+        "tags": [
+          "Claims"
+        ],
+        "operationId": "HasClaim",
+        "parameters": [
+          {
+            "name": "ClaimName",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Claims/user": {
+      "get": {
+        "tags": [
+          "Claims"
+        ],
+        "operationId": "GetUserClaims",
+        "parameters": [
+          {
+            "name": "UserId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Claim"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Claims/add": {
+      "post": {
+        "tags": [
+          "Claims"
+        ],
+        "operationId": "AddClaim",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddClaimCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Claims/remove": {
+      "post": {
+        "tags": [
+          "Claims"
+        ],
+        "operationId": "RemoveClaim",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RemoveClaimCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Clients": {
+      "get": {
+        "tags": [
+          "Clients"
+        ],
+        "operationId": "GetClients",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClientDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Identities": {
+      "get": {
+        "tags": [
+          "Identities"
+        ],
+        "operationId": "GetIdentityUser",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IdentityUserVM"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Identities/all": {
+      "get": {
+        "tags": [
+          "Identities"
+        ],
+        "operationId": "GetIdentityUsers",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IdentityUserVM"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Identities/create": {
+      "post": {
+        "tags": [
+          "Identities"
+        ],
+        "operationId": "CreateIdentityUser",
+        "requestBody": {
+          "x-name": "createUserCommand",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateIdentityUserCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Identities/update/{id}": {
+      "post": {
+        "tags": [
+          "Identities"
+        ],
+        "operationId": "UpdateIdentityUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateIdentityUserCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Identities/delete/{id}": {
+      "post": {
+        "tags": [
+          "Identities"
+        ],
+        "operationId": "DeleteIdentityUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "LoginDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "allowRememberLogin": {
+            "type": "boolean"
+          },
+          "enableLocalLogin": {
+            "type": "boolean"
+          },
+          "externalProviders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExternalProvider"
+            }
+          },
+          "visibleExternalProviders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExternalProvider"
+            }
+          },
+          "isExternalLoginOnly": {
+            "type": "boolean"
+          },
+          "externalLoginScheme": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ExternalProvider": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "authenticationScheme": {
+            "type": "string"
+          }
+        }
+      },
+      "LoginResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "isSuccess": {
+            "type": "boolean"
+          },
+          "redirectUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "LoginCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "rememberLogin": {
+            "type": "boolean"
+          },
+          "returnUrl": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ChangePasswordCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "currentPassword": {
+            "type": "string"
+          },
+          "newPassword": {
+            "type": "string"
+          },
+          "confirmNewPassword": {
+            "type": "string"
+          }
+        }
+      },
+      "ForgotPasswordCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "email": {
+            "type": "string"
+          }
+        }
+      },
+      "ResetPasswordCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "resetToken": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "newPassword": {
+            "type": "string"
+          },
+          "confirmNewPassword": {
+            "type": "string"
+          }
+        }
+      },
+      "AngularSettingsDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "authority": {
+            "type": "string"
+          },
+          "clientId": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "string"
+          }
+        }
+      },
+      "Claim": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "customSerializationData": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "issuer": {
+            "type": "string"
+          },
+          "originalIssuer": {
+            "type": "string"
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "subject": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/ClaimsIdentity"
+              }
+            ]
+          },
+          "type": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "valueType": {
+            "type": "string"
+          }
+        }
+      },
+      "ClaimsIdentity": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "authenticationType": {
+            "type": "string",
+            "nullable": true
+          },
+          "isAuthenticated": {
+            "type": "boolean"
+          },
+          "actor": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/ClaimsIdentity"
+              }
+            ]
+          },
+          "bootstrapContext": {
+            "nullable": true
+          },
+          "claims": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Claim"
+            }
+          },
+          "customSerializationData": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "externalClaims": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Claim"
+              }
+            }
+          },
+          "label": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "nameClaimType": {
+            "type": "string"
+          },
+          "roleClaimType": {
+            "type": "string"
+          }
+        }
+      },
+      "AddClaimCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "guid"
+          },
+          "claim": {
+            "$ref": "#/components/schemas/Claim"
+          }
+        }
+      },
+      "RemoveClaimCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "guid"
+          },
+          "claim": {
+            "$ref": "#/components/schemas/Claim"
+          }
+        }
+      },
+      "ClientDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "clientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "protocolType": {
+            "type": "string",
+            "nullable": true
+          },
+          "requireClientSecret": {
+            "type": "boolean"
+          },
+          "clientName": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "clientUri": {
+            "type": "string",
+            "nullable": true
+          },
+          "logoUri": {
+            "type": "string",
+            "nullable": true
+          },
+          "requireConsent": {
+            "type": "boolean"
+          },
+          "allowRememberConsent": {
+            "type": "boolean"
+          },
+          "alwaysIncludeUserClaimsInIdToken": {
+            "type": "boolean"
+          },
+          "requirePkce": {
+            "type": "boolean"
+          },
+          "allowPlainTextPkce": {
+            "type": "boolean"
+          },
+          "requireRequestObject": {
+            "type": "boolean"
+          },
+          "allowAccessTokensViaBrowser": {
+            "type": "boolean"
+          },
+          "requireDPoP": {
+            "type": "boolean"
+          },
+          "dPoPValidationMode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dPoPClockSkew": {
+            "type": "string",
+            "format": "duration"
+          },
+          "frontChannelLogoutUri": {
+            "type": "string",
+            "nullable": true
+          },
+          "frontChannelLogoutSessionRequired": {
+            "type": "boolean"
+          },
+          "backChannelLogoutUri": {
+            "type": "string",
+            "nullable": true
+          },
+          "backChannelLogoutSessionRequired": {
+            "type": "boolean"
+          },
+          "allowOfflineAccess": {
+            "type": "boolean"
+          },
+          "identityTokenLifetime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "allowedIdentityTokenSigningAlgorithms": {
+            "type": "string",
+            "nullable": true
+          },
+          "accessTokenLifetime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "authorizationCodeLifetime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "consentLifetime": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "absoluteRefreshTokenLifetime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "slidingRefreshTokenLifetime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "refreshTokenUsage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "updateAccessTokenClaimsOnRefresh": {
+            "type": "boolean"
+          },
+          "refreshTokenExpiration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "accessTokenType": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "enableLocalLogin": {
+            "type": "boolean"
+          },
+          "includeJwtId": {
+            "type": "boolean"
+          },
+          "alwaysSendClientClaims": {
+            "type": "boolean"
+          },
+          "clientClaimsPrefix": {
+            "type": "string",
+            "nullable": true
+          },
+          "pairWiseSubjectSalt": {
+            "type": "string",
+            "nullable": true
+          },
+          "initiateLoginUri": {
+            "type": "string",
+            "nullable": true
+          },
+          "userSsoLifetime": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "userCodeType": {
+            "type": "string",
+            "nullable": true
+          },
+          "deviceCodeLifetime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cibaLifetime": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "pollingInterval": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "coordinateLifetimeWithUserSession": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastAccessed": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "nonEditable": {
+            "type": "boolean"
+          },
+          "pushedAuthorizationLifetime": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "requirePushedAuthorization": {
+            "type": "boolean"
+          }
+        }
+      },
+      "IdentityUserVM": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "identityUser": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/IdentityUserDto"
+              }
+            ]
+          },
+          "roleClaims": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "systemClaims": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "IdentityUserDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "CreateIdentityUserCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "roleClaims": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "systemClaims": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "UpdateIdentityUserCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "guid"
+          },
+          "email": {
+            "type": "string"
+          },
+          "roleClaims": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "systemClaims": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

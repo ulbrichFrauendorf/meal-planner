@@ -1,0 +1,18 @@
+<div class="p-fluid">
+    <div class="p-field">
+        <p-listbox
+            [options]="ingredients$ | async"
+            [(ngModel)]="selectedIngredients"
+            optionLabel="name"
+            [filter]="true"
+            [multiple]="true"
+            [checkbox]="true"
+            [style]="{ 'max-height': '30rem' }"
+        />
+    </div>
+</div>
+<app-dialog-actions
+    [submitLabel]="'Add'"
+    (cancel)="onCancel()"
+    (submit)="onSubmit()"
+></app-dialog-actions>

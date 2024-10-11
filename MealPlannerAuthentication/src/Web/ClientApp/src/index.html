@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>IServe</title>
+        <base href="/" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+        <script>
+            // Read the theme and color scheme from localStorage
+            const theme =
+                localStorage.getItem("viewModeTheme") || "lara-light-amber";
+            const colorScheme =
+                localStorage.getItem("viewModeColorScheme") || "light";
+
+            // Construct the new href for the theme
+            const baseThemePath = "assets/layout/styles/theme/";
+            const newHref = `${baseThemePath}${theme}/theme.css`;
+            href = "assets/layout/styles/theme/lara-light-amber/theme.css";
+            document.write(
+                `<link id="theme-css" rel="stylesheet" type="text/css" href="${newHref}" />`
+            );
+        </script>
+    </head>
+
+    <body>
+        <app-root></app-root>
+    </body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>IServe</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+</head>
+<body>
+<app-root></app-root>
+</body>
+</html>
