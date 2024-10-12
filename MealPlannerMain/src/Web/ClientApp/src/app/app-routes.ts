@@ -1,5 +1,5 @@
 import { AppLayoutComponent } from './layout/app.layout.component';
-import { CallbackComponent } from './features/landing/callback/callback.component';
+import { CallbackComponent } from './features/landing/pages/callback/callback.component';
 import { AutoLoginPartialRoutesGuard } from 'angular-auth-oidc-client';
 import { claimsGuard } from './_core/guards/claims.guard';
 import { Routes } from '@angular/router';

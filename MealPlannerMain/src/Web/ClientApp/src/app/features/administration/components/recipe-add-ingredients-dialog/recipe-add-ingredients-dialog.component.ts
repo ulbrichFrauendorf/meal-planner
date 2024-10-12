@@ -8,7 +8,7 @@ import {
     AddRecipeIngredientCommand,
     IngredientDto,
     IngredientsClient,
-    RecipesClient,
+    RecipeIngredientsClient,
 } from '@app/web-api-client';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -43,7 +43,7 @@ export class RecipeAddIngredientsDialogComponent
 
     constructor(
         private ingredientsClient: IngredientsClient,
-        private recipeClient: RecipesClient,
+        private recipeIngredientsClient: RecipeIngredientsClient,
         private messageService: MessageService,
         private dataUpdateEventService: DataUpdateEventService,
         public ref: DynamicDialogRef,
@@ -63,7 +63,7 @@ export class RecipeAddIngredientsDialogComponent
 
     onSubmit() {
         if (this.selectedIngredients?.length > 0) {
-            this.recipeClient
+            this.recipeIngredientsClient
                 .addRecipeIngredients({
                     recipeId: this.recipeId,
                     ingredientIds: this.selectedIngredients.map((x) => x.id),

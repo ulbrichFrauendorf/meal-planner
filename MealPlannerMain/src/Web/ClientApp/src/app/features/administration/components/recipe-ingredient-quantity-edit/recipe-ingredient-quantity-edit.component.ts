@@ -4,7 +4,7 @@ import { KnobModule } from 'primeng/knob';
 import { WithDestroy } from '@app/_core/mixins/with-destroy-mixin';
 import { DataUpdateEventService } from '@app/_core/services/data-update-event/data-update-event.service';
 import {
-    RecipesClient,
+    RecipeIngredientsClient,
     UpdateRecipeIngredientCommand,
 } from '@app/web-api-client';
 import { MessageService } from 'primeng/api';
@@ -27,7 +27,7 @@ export class RecipeIngredientQuantityEditComponent
     quantity: number = 0;
 
     constructor(
-        private recipeClient: RecipesClient,
+        private recipeIngredientsClient: RecipeIngredientsClient,
         private messageService: MessageService,
         private dataUpdateEventService: DataUpdateEventService,
         public ref: DynamicDialogRef,
@@ -47,7 +47,7 @@ export class RecipeIngredientQuantityEditComponent
 
     onSubmit() {
         if (this.recipeIngredientId) {
-            this.recipeClient
+            this.recipeIngredientsClient
                 .updateRecipeIngredient(this.recipeIngredientId, {
                     recipeIngredientId: this.recipeIngredientId,
                     quantity: this.quantity,

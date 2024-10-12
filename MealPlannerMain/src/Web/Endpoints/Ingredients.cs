@@ -1,5 +1,5 @@
-﻿using MealPlanner.Application.Tenants;
-using MealPlanner.Application.Tenants.Queries;
+﻿using MealPlanner.Application.Ingredients;
+using MealPlanner.Application.Ingredients.Queries;
 
 namespace MealPlanner.Web.Endpoints;
 
@@ -9,7 +9,7 @@ public class Ingredients : EndpointGroupBase
 	{
 		app.MapGroup(this).RequireAuthorization()
 			.MapGet(GetAllIngredients, "all")
-			.MapGet(GetAvailableIngredients,"available");
+			.MapGet(GetAvailableIngredients, "available");
 	}
 
 	public Task<IReadOnlyCollection<IngredientDto>> GetAllIngredients(

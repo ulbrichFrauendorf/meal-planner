@@ -1,5 +1,7 @@
 ﻿using System.Reflection;
 using MealPlanner.Application.Common.Behaviours;
+using MealPlanner.Application.Common.Interfaces;
+using MealPlanner.Application.RecipeOptimizer;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MealPlanner.Application;
@@ -20,6 +22,8 @@ public static class DependencyInjection
 			cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 			cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
 		});
+
+		services.AddTransient<IRecipeOptimizerWithBacktracking, RecipeOptimizerWithBacktracking>();
 
 		return services;
 	}

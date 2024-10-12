@@ -1,0 +1,32 @@
+.setup-container {
+    min-width: 80rem;
+    max-width: 80rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 1351px) {
+    .setup-container {
+        min-width: 70rem;
+        max-width: 70rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .setup-container {
+        min-width: 60rem;
+        max-width: 60rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .setup-container {
+        min-width: 50rem;
+        max-width: 50rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .setup-container {
+        min-width: 35rem;
+        max-width: 35rem;
+    }
+}

@@ -1,10 +1,10 @@
 ﻿using MealPlanner.Domain.Entities;
 
-namespace MealPlanner.Application.Tenants;
+namespace MealPlanner.Application.Ingredients;
 
 public class IngredientDto
 {
-	public string Id { get; set; } = null!;
+	public Guid Id { get; set; }
 	public string Name { get; set; } = null!;
 	public int Quantity { get; set; }
 

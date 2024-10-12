@@ -1,14 +1,9 @@
 ﻿using MealPlanner.Application.Common.Interfaces;
 using MealPlanner.Application.Common.Mappings;
 
-namespace MealPlanner.Application.Tenants.Queries;
+namespace MealPlanner.Application.Ingredients.Queries;
 
 public record GetAvailableIngredientsQuery : IRequest<IReadOnlyCollection<IngredientDto>> { }
-
-public class GetAvailableIngredientsQueryValidator : AbstractValidator<GetAvailableIngredientsQuery>
-{
-	public GetAvailableIngredientsQueryValidator() { }
-}
 
 public class GetAvailableIngredientsQueryHandler(
 	IApplicationDbContext context,
@@ -21,7 +16,7 @@ public class GetAvailableIngredientsQueryHandler(
 	)
 	{
 		var ingredients = await context
-			.Ingredients.Where(i=>i.Quantity > 0)
+			.Ingredients.Where(i => i.Quantity > 0)
 			.ProjectToListAsync<IngredientDto>(mapper.ConfigurationProvider);
 
 		return ingredients;

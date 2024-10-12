@@ -1,14 +1,9 @@
 ﻿using MealPlanner.Application.Common.Interfaces;
 using MealPlanner.Application.Common.Mappings;
 
-namespace MealPlanner.Application.Tenants.Queries;
+namespace MealPlanner.Application.Ingredients.Queries;
 
 public record GetAllIngredientsQuery : IRequest<IReadOnlyCollection<IngredientDto>> { }
-
-public class GetAllIngredientsQueryValidator : AbstractValidator<GetAllIngredientsQuery>
-{
-	public GetAllIngredientsQueryValidator() { }
-}
 
 public class GetAllIngredientsQueryHandler(
 	IApplicationDbContext context,

@@ -1,4 +1,4 @@
-﻿using MealPlanner.Application.Users.Queries;
+﻿using MealPlanner.Application.Claims.Queries.HasClaim;
 
 namespace MealPlanner.Web.Endpoints;
 

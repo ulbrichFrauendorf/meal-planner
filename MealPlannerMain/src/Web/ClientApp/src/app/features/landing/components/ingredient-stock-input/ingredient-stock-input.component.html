@@ -1,0 +1,57 @@
+<p-table #ingredientsTable [value]="ingredients()" editable="true" dataKey="id">
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width: 75%">Ingredient Name</th>
+            <th style="width: 25%">Quantity</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-ingredient let-editing="editing">
+        <tr>
+            <td>{{ ingredient.name }}</td>
+            <td
+                [pEditableColumn]="ingredient.quantity"
+                pEditableColumnField="quantity"
+            >
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <p-inputNumber
+                            [(ngModel)]="ingredient.quantity"
+                            [showButtons]="true"
+                            buttonLayout="horizontal"
+                            inputId="integeronly"
+                            spinnerMode="horizontal"
+                            [step]="1"
+                            decrementButtonClass="p-button-danger"
+                            incrementButtonClass="p-button-success"
+                            incrementButtonIcon="pi pi-plus"
+                            decrementButtonIcon="pi pi-minus"
+                        />
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        <p-inputNumber
+                            [(ngModel)]="ingredient.quantity"
+                            [showButtons]="true"
+                            buttonLayout="horizontal"
+                            inputId="integeronly"
+                            spinnerMode="horizontal"
+                            [step]="1"
+                            decrementButtonClass="p-button-danger"
+                            incrementButtonClass="p-button-success"
+                            incrementButtonIcon="pi pi-plus"
+                            decrementButtonIcon="pi pi-minus"
+                        />
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<div class="flex justify-content-center flex-wrap pt-4 mr-4 gap-2">
+    <p-button
+        label="Calculate"
+        icon="pi pi-check"
+        [outlined]="true"
+        severity="primary"
+        (click)="onSubmit()"
+    />
+</div>

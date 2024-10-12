@@ -14,14 +14,14 @@ public static class DependencyInjection
 		services.AddDatabaseDeveloperPageExceptionFilter();
 
 		services.AddHttpClient();
+
 		services.AddHttpContextAccessor();
+
 		services.AddScoped<IUser, CurrentUser>();
 
 		services.AddHealthChecks().AddDbContextCheck<ApplicationDbContext>();
 
 		services.AddExceptionHandler<CustomExceptionHandler>();
-
-		services.AddRazorPages();
 
 		// Customise default API behaviour
 		services.Configure<ApiBehaviorOptions>(options =>
@@ -33,36 +33,30 @@ public static class DependencyInjection
 		services.AddOpenApiDocument(
 			(configure, sp) =>
 			{
-				configure.Title = "Iserve Reporting API";
+				configure.Title = "Meal Planner API";
 				configure.PostProcess = document =>
 				{
 					document.Info = new OpenApiInfo
 					{
 						Version = "v1",
-						Title = "ToDo API",
-						Description = "An ASP.NET Core Web API for managing ToDo items",
-						TermsOfService = "https://example.com/terms",
+						Title = "Meal Planner API",
+						Description = "An ASP.NET Core Web API ",
 						Contact = new OpenApiContact
 						{
-							Name = "Example Contact",
-							Url = "https://example.com/contact"
-						},
-						License = new OpenApiLicense
-						{
-							Name = "Example License",
-							Url = "https://example.com/license"
+							Name = "Ulbrich Frauendorf",
+							Url = "https://ulbrichfrauendorf.github.io/cv/"
 						}
 					};
 				};
 
 				configure.AddSecurity(
 					"JWT Token",
-					Enumerable.Empty<string>(),
+					[],
 					new OpenApiSecurityScheme
 					{
 						Description =
 							"JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-						Type = OpenApiSecuritySchemeType.ApiKey,
+						Type = OpenApiSecuritySchemeType.OpenIdConnect,
 						Name = "Authorization",
 						In = OpenApiSecurityApiKeyLocation.Header
 					}

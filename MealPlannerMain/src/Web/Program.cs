@@ -4,8 +4,6 @@ using MealPlanner.Infrastructure.Data;
 using MealPlanner.Web;
 using Sentry.OpenTelemetry;
 
-//Todo Use specs
-//Todo Use events
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +11,8 @@ builder.WebHost.UseSentry(options =>
 {
 	options.UseOpenTelemetry();
 });
+
+builder.Services.AddControllers();
 
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(
@@ -50,6 +50,7 @@ app.UseSwaggerUi(settings =>
 	settings.DocumentPath = "/api/specification.json";
 	settings.PersistAuthorization = true;
 });
+
 app.UseReDoc(options =>
 {
 	options.Path = "/redoc";
@@ -60,9 +61,8 @@ app.UseCors("AllowAngularOrigin");
 app.MapControllerRoute(name: "default", pattern: "{controller}/{action=Index}/{id?}");
 
 app.UseAuthentication();
-app.UseAuthorization();
 
-app.MapRazorPages();
+app.UseAuthorization();
 
 app.MapFallbackToFile("index.html");
 

@@ -1,7 +1,10 @@
 import { Component, inject, Input, OnInit, signal } from '@angular/core';
 import { WithDestroy } from '@app/_core/mixins/with-destroy-mixin';
 import { DataUpdateEventService } from '@app/_core/services/data-update-event/data-update-event.service';
-import { RecipeIngredientDto, RecipesClient } from '@app/web-api-client';
+import {
+    RecipeIngredientDto,
+    RecipeIngredientsClient,
+} from '@app/web-api-client';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
 import { Observable, switchMap, takeUntil } from 'rxjs';
@@ -43,7 +46,7 @@ export class RecipeIngredientsComponent
     isDialogVisible = signal(false);
 
     constructor(
-        private recipesClient: RecipesClient,
+        private recipeIngredientsClient: RecipeIngredientsClient,
         private dataUpdateEventService: DataUpdateEventService,
         private messageService: MessageService
     ) {
@@ -53,7 +56,7 @@ export class RecipeIngredientsComponent
     ngOnInit(): void {
         this.recipeIngredients$ = this.dataUpdateEventService.dataUpdated$.pipe(
             switchMap(() =>
-                this.recipesClient.getRecipeIngredients(this.recipeId)
+                this.recipeIngredientsClient.getRecipeIngredients(this.recipeId)
             )
         );
     }
@@ -108,7 +111,7 @@ export class RecipeIngredientsComponent
                 header: 'Are you sure?',
 
                 accept: () => {
-                    this.recipesClient
+                    this.recipeIngredientsClient
                         .removeRecipeIngredient(recipeIngredientId)
                         .pipe(takeUntil(this.destroy$))
                         .subscribe({

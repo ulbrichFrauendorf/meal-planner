@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { LandingDashboardComponent } from './landing-dashboard/landing-dashboard.component';
+import { LandingDashboardComponent } from './pages/landing-dashboard/landing-dashboard.component';
 
 export const LANDING_ROUTES: Routes = [
     {

@@ -1,21 +1,20 @@
 <div class="layout-wrapper" [ngClass]="containerClass">
-   <app-topbar></app-topbar>
-   <div class="layout-sidebar">
-      <app-sidebar></app-sidebar>
-   </div>
-   <div class="layout-main-container">
-      <div class="layout-main">
-         <ng-container
-            *ngIf="viewStateService.emptyState$ | async; else showSite"
-         >
-            <app-empty-state [fixed]="true" />
-         </ng-container>
+    <app-topbar></app-topbar>
+    <div class="layout-sidebar">
+        <app-sidebar></app-sidebar>
+    </div>
+    <div class="layout-main-container">
+        <div class="layout-main">
+            <ng-container
+                *ngIf="viewStateService.emptyState$ | async; else showSite"
+            >
+                <app-empty-state [fixed]="true" />
+            </ng-container>
 
-         <ng-template #showSite>
-            <router-outlet />
-         </ng-template>
-      </div>
-   </div>
-   <app-config></app-config>
-   <div class="layout-mask"></div>
+            <ng-template #showSite>
+                <router-outlet />
+            </ng-template>
+        </div>
+    </div>
+    <div class="layout-mask"></div>
 </div>
