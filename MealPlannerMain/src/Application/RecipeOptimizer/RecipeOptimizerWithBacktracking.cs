@@ -3,7 +3,6 @@ using MealPlanner.Application.Ingredients;
 using MealPlanner.Domain.Entities;
 
 namespace MealPlanner.Application.RecipeOptimizer;
-namespace MealPlanner.Application.RecipeOptimizer;
 
 public class RecipeOptimizerWithBacktracking(IApplicationDbContext context) : IRecipeOptimizerWithBacktracking
 {
@@ -39,6 +38,27 @@ public class RecipeOptimizerWithBacktracking(IApplicationDbContext context) : IR
 				Quantity = kvp.Value
 			})
 			.ToList();
+
+		var recipeHistory = new CalculationHistory
+		{
+			CalculationDate = DateTime.Now,
+			PeopleFed = maxPeopleFed,
+			RecipeDetails = groupedRecipeResults.Select(r => new CalculationRecipeDetail
+			{
+				RecipeId = r.Id,
+				QuantityMade = r.Quantity
+			}).ToList(),
+			IngredientDetails = ingredientsUsedResults.Select(i => new CalculationIngredientDetail
+			{
+				IngredientId = i.Id,
+				QuantityUsed = i.Quantity
+			}).ToList()
+		};
+
+		// Save the calculation history
+		await context.CalculationHistories.AddAsync(recipeHistory, cancellationToken);
+
+		await context.SaveChangesAsync(cancellationToken);
 
 		return new CalculationResult
 		{

@@ -433,6 +433,12 @@
             "items": {
               "$ref": "#/components/schemas/RecipeResult"
             }
+          },
+          "ingredientsUsed": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IngredientUsedResult"
+            }
           }
         }
       },
@@ -440,6 +446,10 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
           "name": {
             "type": "string"
           },
@@ -448,6 +458,23 @@
             "format": "int32"
           },
           "peopleFed": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "IngredientUsedResult": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "quantity": {
             "type": "integer",
             "format": "int32"
           }

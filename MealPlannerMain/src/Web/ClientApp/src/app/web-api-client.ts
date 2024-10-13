@@ -828,6 +828,7 @@ export interface IUpdateRecipeIngredientCommand {
 export class CalculationResult implements ICalculationResult {
     peopleFed?: number;
     recipes?: RecipeResult[];
+    ingredientsUsed?: IngredientUsedResult[];
 
     constructor(data?: ICalculationResult) {
         if (data) {
@@ -845,6 +846,11 @@ export class CalculationResult implements ICalculationResult {
                 this.recipes = [] as any;
                 for (let item of _data["recipes"])
                     this.recipes!.push(RecipeResult.fromJS(item));
+            }
+            if (Array.isArray(_data["ingredientsUsed"])) {
+                this.ingredientsUsed = [] as any;
+                for (let item of _data["ingredientsUsed"])
+                    this.ingredientsUsed!.push(IngredientUsedResult.fromJS(item));
             }
         }
     }
@@ -864,6 +870,11 @@ export class CalculationResult implements ICalculationResult {
             for (let item of this.recipes)
                 data["recipes"].push(item.toJSON());
         }
+        if (Array.isArray(this.ingredientsUsed)) {
+            data["ingredientsUsed"] = [];
+            for (let item of this.ingredientsUsed)
+                data["ingredientsUsed"].push(item.toJSON());
+        }
         return data;
     }
 }
@@ -871,9 +882,11 @@ export class CalculationResult implements ICalculationResult {
 export interface ICalculationResult {
     peopleFed?: number;
     recipes?: RecipeResult[];
+    ingredientsUsed?: IngredientUsedResult[];
 }
 
 export class RecipeResult implements IRecipeResult {
+    id?: string;
     name?: string;
     quantity?: number;
     peopleFed?: number;
@@ -889,6 +902,7 @@ export class RecipeResult implements IRecipeResult {
 
     init(_data?: any) {
         if (_data) {
+            this.id = _data["id"];
             this.name = _data["name"];
             this.quantity = _data["quantity"];
             this.peopleFed = _data["peopleFed"];
@@ -904,6 +918,7 @@ export class RecipeResult implements IRecipeResult {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
         data["name"] = this.name;
         data["quantity"] = this.quantity;
         data["peopleFed"] = this.peopleFed;
@@ -912,9 +927,54 @@ export class RecipeResult implements IRecipeResult {
 }
 
 export interface IRecipeResult {
+    id?: string;
     name?: string;
     quantity?: number;
     peopleFed?: number;
+}
+
+export class IngredientUsedResult implements IIngredientUsedResult {
+    id?: string;
+    name?: string;
+    quantity?: number;
+
+    constructor(data?: IIngredientUsedResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.quantity = _data["quantity"];
+        }
+    }
+
+    static fromJS(data: any): IngredientUsedResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new IngredientUsedResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["quantity"] = this.quantity;
+        return data;
+    }
+}
+
+export interface IIngredientUsedResult {
+    id?: string;
+    name?: string;
+    quantity?: number;
 }
 
 export class GetOptimalRecipeInformationQuery implements IGetOptimalRecipeInformationQuery {

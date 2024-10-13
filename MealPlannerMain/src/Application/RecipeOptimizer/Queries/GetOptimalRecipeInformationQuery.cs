@@ -16,6 +16,11 @@ public class GetOptimalRecipeInformationQueryHandler(IRecipeOptimizerWithBacktra
 		CancellationToken cancellationToken
 	)
 	{
-		return await recipeOptimizer.OptimizeFeeding(request.AvailableIngredients, cancellationToken);
+		var optimizationResult = await recipeOptimizer.OptimizeFeeding(
+			request.AvailableIngredients,
+			cancellationToken
+		);
+
+		return optimizationResult;
 	}
 }
