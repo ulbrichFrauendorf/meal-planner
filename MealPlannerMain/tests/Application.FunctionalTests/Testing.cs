@@ -51,21 +51,23 @@ public partial class Testing
 		return _userId;
 	}
 
-	public static string RunAsDefaultUserAsync()
+	public static string RunAsDefaultUser()
 	{
-		return RunAsUserAsync("test@local", "Testing1234!", Array.Empty<string>());
+		return RunAsUser("user@mealplanner.web.za",
+			//"P@ssw0rd1",
+			[Policies.User]);
 	}
 
-	public static string RunAsAdministratorAsync()
+	public static string RunAsAdministrator()
 	{
-		return RunAsUserAsync(
-			"administrator@local",
-			"Administrator1234!",
-			new[] { Roles.Administrator }
+		return RunAsUser(
+			"admin@mealplanner.web.za",
+			//"P@ssw0rd1",
+			[Policies.Admin]
 		);
 	}
 
-	public static string RunAsUserAsync(string userName, string password, string[] roles)
+	public static string RunAsUser(string userName, string[] roles)
 	{
 		var mockHttpContextAccessor = new Mock<IHttpContextAccessor>();
 
@@ -75,8 +77,12 @@ public partial class Testing
 		{
 			new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString()),
 			new Claim(ClaimTypes.Email, userName),
-			new Claim(ClaimTypes.Name, userName),
-			new Claim(ClaimTypes.Role, "TestRole")
+			new Claim(ClaimTypes.Name, userName)
+		};
+
+		foreach (var role in roles)
+		{
+			claims.Add(new Claim(ClaimTypes.Role, role));
 		};
 
 		var identity = new ClaimsIdentity(claims, "TestAuthType");

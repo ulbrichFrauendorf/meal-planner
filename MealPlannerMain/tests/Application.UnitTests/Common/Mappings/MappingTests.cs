@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using AutoMapper;
 using MealPlanner.Application.Common.Interfaces;
-using MealPlanner.Application.Reports;
+using MealPlanner.Application.Recipes;
 using MealPlanner.Domain.Entities;
 using NUnit.Framework;
 
@@ -29,7 +29,7 @@ public class MappingTests
 	}
 
 	[Test]
-	[TestCase(typeof(Report), typeof(ReportDto))]
+	[TestCase(typeof(Recipe), typeof(RecipeDto))]
 	public void ShouldSupportMappingFromSourceToDestination(Type source, Type destination)
 	{
 		var instance = GetInstanceOf(source);
