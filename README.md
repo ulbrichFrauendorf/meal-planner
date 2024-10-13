@@ -1,4 +1,4 @@
-﻿# Meal Planner Web Application (Job Interview Task)
+﻿# Meal Planner Web Application
 
 ## Run
 
