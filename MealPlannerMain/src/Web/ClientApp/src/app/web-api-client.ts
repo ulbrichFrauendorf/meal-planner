@@ -827,6 +827,7 @@ export interface IUpdateRecipeIngredientCommand {
 
 export class CalculationResult implements ICalculationResult {
     peopleFed?: number;
+    recipes?: RecipeResult[];
 
     constructor(data?: ICalculationResult) {
         if (data) {
@@ -840,6 +841,11 @@ export class CalculationResult implements ICalculationResult {
     init(_data?: any) {
         if (_data) {
             this.peopleFed = _data["peopleFed"];
+            if (Array.isArray(_data["recipes"])) {
+                this.recipes = [] as any;
+                for (let item of _data["recipes"])
+                    this.recipes!.push(RecipeResult.fromJS(item));
+            }
         }
     }
 
@@ -853,11 +859,61 @@ export class CalculationResult implements ICalculationResult {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["peopleFed"] = this.peopleFed;
+        if (Array.isArray(this.recipes)) {
+            data["recipes"] = [];
+            for (let item of this.recipes)
+                data["recipes"].push(item.toJSON());
+        }
         return data;
     }
 }
 
 export interface ICalculationResult {
+    peopleFed?: number;
+    recipes?: RecipeResult[];
+}
+
+export class RecipeResult implements IRecipeResult {
+    name?: string;
+    quantity?: number;
+    peopleFed?: number;
+
+    constructor(data?: IRecipeResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.name = _data["name"];
+            this.quantity = _data["quantity"];
+            this.peopleFed = _data["peopleFed"];
+        }
+    }
+
+    static fromJS(data: any): RecipeResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new RecipeResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["quantity"] = this.quantity;
+        data["peopleFed"] = this.peopleFed;
+        return data;
+    }
+}
+
+export interface IRecipeResult {
+    name?: string;
+    quantity?: number;
     peopleFed?: number;
 }
 

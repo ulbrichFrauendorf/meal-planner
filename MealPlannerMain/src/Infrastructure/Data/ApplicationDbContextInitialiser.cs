@@ -56,19 +56,7 @@ public class ApplicationDbContextInitialiser(
 	{
 		//// Default data
 		//// Seed, if necessary
-		//Guid userId;
 
-		//if (!context.Users.Any(u => u.Email == Constants.TestUserEmail))
-		//{
-		//	await context.Users.AddRangeAsync(
-		//		[new User { Id = Constants.TestUserId, Email = Constants.TestUserEmail }]
-		//	);
-		//	await context.SaveChangesAsync();
-		//}
-		//else
-		//{
-		//	userId = context.Users.First(s => s.Email == Constants.TestUserEmail).Id;
-		//}
 
 		if (!context.Ingredients.Any())
 		{

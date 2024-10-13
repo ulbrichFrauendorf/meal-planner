@@ -1,6 +1,6 @@
 ﻿namespace MealPlanner.Domain.Events;
 
-public class IngredientAddedEvent(Ingredient ingredient) : BaseEvent
+public class IngredientAddedEvent(RecipeIngredient recipeIngredient) : BaseEvent
 {
-	public Ingredient Item { get; } = ingredient;
+	public RecipeIngredient Item { get; } = recipeIngredient;
 }

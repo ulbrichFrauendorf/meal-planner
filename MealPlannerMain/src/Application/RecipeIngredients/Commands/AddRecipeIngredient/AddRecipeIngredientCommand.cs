@@ -1,8 +1,12 @@
 ﻿using MealPlanner.Application.Common.Interfaces;
+using MealPlanner.Application.Common.Security;
+using MealPlanner.Domain.Constants;
 using MealPlanner.Domain.Entities;
+using MealPlanner.Domain.Events;
 
 namespace MealPlanner.Application.RecipeIngredients.Commands.AddRecipeIngredient;
 
+[Authorize(Policy = Policies.Admin)]
 public record AddRecipeIngredientCommand() : IRequest<List<Guid>>
 {
 	public Guid RecipeId { get; init; }
@@ -20,6 +24,11 @@ public class AddRecipeIngredientCommandHandler(IApplicationDbContext context) : 
 		});
 
 		context.RecipeIngredients.AddRange(entities);
+
+		foreach (var entity in entities)
+		{
+			entity.AddDomainEvent(new IngredientAddedEvent(entity));
+		}
 
 		await context.SaveChangesAsync(cancellationToken);
 

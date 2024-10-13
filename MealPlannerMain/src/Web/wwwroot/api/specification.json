@@ -427,6 +427,29 @@
           "peopleFed": {
             "type": "integer",
             "format": "int32"
+          },
+          "recipes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RecipeResult"
+            }
+          }
+        }
+      },
+      "RecipeResult": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "peopleFed": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },

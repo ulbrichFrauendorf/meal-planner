@@ -1,8 +1,11 @@
 ﻿using MealPlanner.Application.Common.Interfaces;
 using MealPlanner.Application.Common.Mappings;
+using MealPlanner.Application.Common.Security;
+using MealPlanner.Domain.Constants;
 
 namespace MealPlanner.Application.RecipeIngredients.Queries.GetRecipeIngredients;
 
+[Authorize(Policy = Policies.Admin)]
 public record GetRecipeIngredientsQuery : IRequest<IReadOnlyCollection<RecipeIngredientDto>>
 {
 	public Guid RecipeId { get; init; }

@@ -12,19 +12,14 @@
                     </div>
                 </p-accordionTab>
             </p-accordion>
+            <app-loading-spinner></app-loading-spinner>
+            <ng-container *ngIf="calculationResult()">
+                <div class="card w-full mt-4">
+                    <app-recipe-maximize-result
+                        [data]="calculationResult()"
+                    ></app-recipe-maximize-result>
+                </div>
+            </ng-container>
         </div>
-    </div>
-</div>
-
-<div class="flex justify-content-center">
-    <div class="setup-container">
-        <app-loading-spinner></app-loading-spinner>
-        <ng-container *ngIf="calculationResult()">
-            <div class="card w-full mt-4">
-                <app-recipe-maximize-result
-                    [data]="calculationResult()"
-                ></app-recipe-maximize-result>
-            </div>
-        </ng-container>
     </div>
 </div>

@@ -1,7 +1,10 @@
 ﻿using MealPlanner.Application.Common.Interfaces;
+using MealPlanner.Application.Common.Security;
+using MealPlanner.Domain.Constants;
 
 namespace MealPlanner.Application.RecipeIngredients.Commands.UpdateRecipeIngredient;
 
+[Authorize(Policy = Policies.Admin)]
 public record UpdateRecipeIngredientCommand() : IRequest
 {
 	public Guid RecipeIngredientId { get; init; }

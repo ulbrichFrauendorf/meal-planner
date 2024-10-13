@@ -1,4 +1,5 @@
-﻿using MealPlanner.Application.Recipes;
+﻿using MealPlanner.Application.RecipeOptimizer;
+using MealPlanner.Application.Recipes;
 using MealPlanner.Application.Recipes.Commands.AddRecipeCommand;
 using MealPlanner.Application.Recipes.Queries.GetAllRecipes;
 
