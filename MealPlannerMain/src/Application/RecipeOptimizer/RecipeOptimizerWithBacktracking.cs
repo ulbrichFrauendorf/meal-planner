@@ -3,9 +3,11 @@ using MealPlanner.Application.Ingredients;
 using MealPlanner.Domain.Entities;
 
 namespace MealPlanner.Application.RecipeOptimizer;
+namespace MealPlanner.Application.RecipeOptimizer;
+
 public class RecipeOptimizerWithBacktracking(IApplicationDbContext context) : IRecipeOptimizerWithBacktracking
 {
-	private readonly Dictionary<string, (int peopleFed, List<RecipeResult> recipesUsed)> _memo = []; // Memoization
+	private readonly Dictionary<string, (int peopleFed, List<RecipeResult> recipesUsed, Dictionary<Guid, int> ingredientsUsed)> _memo = new(); // Memoization
 
 	public async Task<CalculationResult> OptimizeFeeding(List<IngredientDto> availableIngredients, CancellationToken cancellationToken)
 	{
@@ -14,27 +16,50 @@ public class RecipeOptimizerWithBacktracking(IApplicationDbContext context) : IR
 		var recipes = await context.Recipes.Include(r => r.RecipeIngredients)
 			.ToListAsync(cancellationToken);
 
-		var (maxPeopleFed, recipeResults) = Backtrack(recipes, availableIngredientsDict);
+		var (maxPeopleFed, recipeResults, ingredientsUsed) = Backtrack(recipes, availableIngredientsDict);
 
-		var groupedRecipeReslts = recipeResults
+		// Group the recipe results
+		var groupedRecipeResults = recipeResults
 			.GroupBy(r => r.Name)
-			.Select(g => new RecipeResult { Name = g.Key, Quantity = g.Count(), PeopleFed = g.Sum(r => r.PeopleFed) })
+			.Select(g => new RecipeResult
+			{
+				Id = g.First().Id, // Assuming all recipes with the same name have the same ID
+				Name = g.Key,
+				Quantity = g.Count(),
+				PeopleFed = g.Sum(r => r.PeopleFed)
+			})
 			.ToList();
 
-		return new CalculationResult { PeopleFed = maxPeopleFed, Recipes = groupedRecipeReslts };
+		// Create the list of ingredients used based on the final bestIngredientsUsed dictionary
+		var ingredientsUsedResults = ingredientsUsed
+			.Select(kvp => new IngredientUsedResult
+			{
+				Id = kvp.Key,
+				Name = availableIngredients.First(i => i.Id == kvp.Key).Name,
+				Quantity = kvp.Value
+			})
+			.ToList();
+
+		return new CalculationResult
+		{
+			PeopleFed = maxPeopleFed,
+			Recipes = groupedRecipeResults,
+			IngredientsUsed = ingredientsUsedResults
+		};
 	}
 
-	private (int peopleFed, List<RecipeResult> recipesUsed) Backtrack(List<Recipe> recipes, Dictionary<Guid, int> availableIngredients)
+	private (int peopleFed, List<RecipeResult> recipesUsed, Dictionary<Guid, int> ingredientsUsed) Backtrack(List<Recipe> recipes, Dictionary<Guid, int> availableIngredients)
 	{
 		var stateKey = GenerateStateKey(availableIngredients);
 
 		if (_memo.TryGetValue(stateKey, out var memoizedResult))
 		{
-			return memoizedResult;
+			return (memoizedResult.peopleFed, memoizedResult.recipesUsed, memoizedResult.ingredientsUsed);
 		}
 
 		var maxPeopleFed = 0;
 		var bestRecipeCombination = new List<RecipeResult>();
+		var bestIngredientsUsed = new Dictionary<Guid, int>();
 
 		for (var i = 0; i < recipes.Count; i++) // Brute Force
 		{
@@ -42,6 +67,7 @@ public class RecipeOptimizerWithBacktracking(IApplicationDbContext context) : IR
 			var canMakeRecipe = true;
 
 			var newIngredients = new Dictionary<Guid, int>(availableIngredients);
+			var currentIngredientsUsed = new Dictionary<Guid, int>();
 
 			foreach (var ingredient in recipe.RecipeIngredients)
 			{
@@ -56,6 +82,15 @@ public class RecipeOptimizerWithBacktracking(IApplicationDbContext context) : IR
 					}
 
 					newIngredients[ingredient.IngredientId] -= ingredient.Quantity;
+
+					if (currentIngredientsUsed.ContainsKey(ingredient.IngredientId))
+					{
+						currentIngredientsUsed[ingredient.IngredientId] += ingredient.Quantity;
+					}
+					else
+					{
+						currentIngredientsUsed[ingredient.IngredientId] = ingredient.Quantity;
+					}
 				}
 				else
 				{
@@ -66,8 +101,7 @@ public class RecipeOptimizerWithBacktracking(IApplicationDbContext context) : IR
 
 			if (canMakeRecipe)
 			{
-				// Recursively find the best combination using remaining ingredients
-				var (peopleFedWithCurrentRecipe, recipesUsedForCurrentCombo) = Backtrack(recipes, newIngredients);
+				var (peopleFedWithCurrentRecipe, recipesUsedForCurrentCombo, ingredientsUsedForCurrentCombo) = Backtrack(recipes, newIngredients);
 
 				var totalPeopleFed = recipe.PeopleFed + peopleFedWithCurrentRecipe;
 
@@ -77,15 +111,34 @@ public class RecipeOptimizerWithBacktracking(IApplicationDbContext context) : IR
 
 					bestRecipeCombination = new List<RecipeResult>(recipesUsedForCurrentCombo)
 					{
-						new RecipeResult { Name = recipe.Name, PeopleFed = recipe.PeopleFed }
+						new RecipeResult
+						{
+							Id = recipe.Id,
+							Name = recipe.Name,
+							Quantity = 1,
+							PeopleFed = recipe.PeopleFed
+						}
 					};
+
+					bestIngredientsUsed = new Dictionary<Guid, int>(ingredientsUsedForCurrentCombo);
+					foreach (var kvp in currentIngredientsUsed)
+					{
+						if (bestIngredientsUsed.ContainsKey(kvp.Key))
+						{
+							bestIngredientsUsed[kvp.Key] += kvp.Value;
+						}
+						else
+						{
+							bestIngredientsUsed[kvp.Key] = kvp.Value;
+						}
+					}
 				}
 			}
 		}
 
-		_memo[stateKey] = (maxPeopleFed, bestRecipeCombination);
+		_memo[stateKey] = (maxPeopleFed, bestRecipeCombination, bestIngredientsUsed);
 
-		return (maxPeopleFed, bestRecipeCombination);
+		return (maxPeopleFed, bestRecipeCombination, bestIngredientsUsed);
 	}
 
 	private static string GenerateStateKey(Dictionary<Guid, int> availableIngredients)
@@ -93,3 +146,4 @@ public class RecipeOptimizerWithBacktracking(IApplicationDbContext context) : IR
 		return string.Join(",", availableIngredients.Select(kvp => $"{kvp.Key}:{kvp.Value}"));
 	}
 }
+
