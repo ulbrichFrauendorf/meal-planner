@@ -21,40 +21,74 @@ User: user@mealplanner.web.za - P@ssw0rd1
 
 Administrator: admin@mealplanner.web.za - P@ssw0rd1
 
-## Solution Context
+## Solution Overview
 
-Minimal Api endpoints are used, but organized in a controller-like fashion. The magic is being done with reflection in the WebApplicationExtensions class inside the web project. Every endpoint needs to inherit the EndpointGroupBase class, in order for the Endpoints to be utilized correctly.
+The project utilizes **Minimal API** endpoints organized similarly to traditional controllers. The reflection logic in the `WebApplicationExtensions` class (located in the `Web` project) dynamically manages these endpoints.
 
-The Command AddRecipeIngredientCommand showcases the full power of this Application, by utilizing validition behaviours included in Mediatr Pattern as well as the event handler, that is set up in the domain layer, but dispatched by way of Data base interceptor. "DispatchDomainEventsInterceptor". Every data base entity is audited using the AuditableEntityInterceptor Class. Thus elimination the need for seting up temporal Tables in the SQL database.
+Each API endpoint must inherit from the `EndpointGroupBase` class to ensure proper functionality.
 
-AuthorizeAttribute has been implemented in the application layer, in order to granualary control the authorization at a business rule level.
+### Key Features
 
-I have added only CRUD implementation of the Recipes Domain Entity. And the Functionality as requested.
+- **Command Pattern**:  
+  The `AddRecipeIngredientCommand` highlights the core capabilities of the application by utilizing:
 
-Nswag is used to generate the Enpoint http Clients as well as the data models reqired by the Endpoints.(This truly creates a balance between speed of development and structure, whis is easy to maintain sing the backend and basically copied to the front-end.)
+  - Validation behaviors via **MediatR**.
+  - Event handling configured in the **domain layer** and dispatched using the `DispatchDomainEventsInterceptor`.
 
-No Repository pattern used in source. Opted for a DbContext interface in the Application Layer, Which still adheres strictly to CLEAN architecture.
+- **Auditing**:  
+  Every database entity is audited using the `AuditableEntityInterceptor`, which eliminates the need for SQL temporal tables.
 
-_(I am sure discussions will be prompted...)_
+- **Authorization**:  
+  The `AuthorizeAttribute` is implemented in the **application layer** to provide fine-grained control over authorization based on business rules.
 
-## DB migrations
+- **Domain Implementation**:  
+  The application currently implements basic CRUD operations for the `Recipes` domain entity along with the requested functionality.
+
+- **NSwag**:  
+  NSwag is utilized to generate:
+
+  - HTTP clients for the endpoints.
+  - Data models required by the API, providing a balance between rapid development and maintainable code that is consistent across both the backend and frontend.
+
+- **Clean Architecture**:  
+  The solution adheres strictly to Clean Architecture principles. Instead of using a repository pattern, a `DbContext` interface is implemented in the **application layer**, maintaining architectural integrity.
+
+> **Note**: This README is designed to be concise to encourage further discussion during the interview.
+
+## Database Migrations
+
+For those interested in handling migrations within this architecture, here are the commands:
+
+### Adding a Migration:
 
 (If you are interested how to do it, with the architecture I used)
 
 Add
 
 ```
+
 dotnet ef migrations add "SampleMigration" --project src\Infrastructure --startup-project src\Web --output-dir Data\Migrations
+
 ```
 
 Remove
 
 ```
+
 dotnet ef migrations remove --project src\Infrastructure --startup-project src\Web
+
 ```
 
-## Tests
+## Testing
 
-Docker is needed to run the Application.FunctionalTests.
+- **Docker**:  
+  The `Application.FunctionalTests` requires Docker to be running.
 
-Mapper tests will search for any Mappers used and test nmapped properties.
+- **Mapper Tests**:  
+  The tests will automatically discover all **AutoMapper** configurations used in the project and ensure that properties are correctly mapped between source and target models.
+
+## Final Notes
+
+- I used my GitHub logo across all sites; I felt that designing a new logo was unnecessary given the project's focus.
+
+---
